@@ -7,6 +7,7 @@
   height: 100%;
   color: #ffffff;
 }
+
 .app__header{
   background-color: #000000;
   padding: 20px;
@@ -15,10 +16,7 @@
   color: white;
 }
 
-.signUpButton{
-  color: white;
-}
-
-.signUpButton:disabled{
-  color: white;
+.app__signup{
+  display: flex;
+  flex-direction: column;
 }
