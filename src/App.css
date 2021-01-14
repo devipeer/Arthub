@@ -4,7 +4,6 @@
 
 .app {
   background-color: #161515;
-  height: 100%;
   color: #ffffff;
 }
 
@@ -14,9 +13,25 @@
   border-bottom: 1px solid rgb(27, 27, 27);
   object-fit: contain;
   color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.app__headerImage {
+  object-fit: contain;
 }
 
 .app__signup{
   display: flex;
   flex-direction: column;
+}
+
+.app__loginContainer{
+  margin: 5px;
+}
+
+.app__posts {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
 }
