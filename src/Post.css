@@ -26,4 +26,31 @@
     margin-right: 10px;
 }
 
+.post__commentBox {
+    display: flex;
+    margin-top: 10px;
+}
+
+.post__input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-top: 1px solid black;
+    color: white;
+    background-color: #0e0e0e;
+}
+
+.post__button {
+    flex: 0;
+    border: none;
+    color: white;
+    background-color: transparent;
+    border-top: 1px solid black;
+}
+
+.post__comment{
+    padding: 20px;
+}
+
+
 

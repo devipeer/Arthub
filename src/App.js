@@ -8,7 +8,6 @@ import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ImageUpload from './ImageUpload';
-import InstagramEmbed from 'react-instagram-embed'
 
 function getModalStyle() {
   const top = 50;
@@ -36,11 +35,13 @@ const StyledButton = withStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     borderRadius: 3,
+    minWidth: '120px',
     border: 0,
     color: 'white',
     height: 48,
     padding: '30px 30px',
     margin: '10px',
+    float: 'right',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   },
   label: {
@@ -87,10 +88,6 @@ function App() {
     })
   }, []);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const signUp = (event) => {
       event.preventDefault();
       auth
@@ -101,6 +98,7 @@ function App() {
         })
       })
       .catch((error) => alert(error.message));
+      setOpen(false);
   };
 
   const signIn = (event) => {
@@ -108,15 +106,16 @@ function App() {
     auth
     .signInWithEmailAndPassword(email, password)
     .catch((error) => alert(error.message))
+    setOpenSignIn(false);
   };
 
-  return (
+  return ( 
     <div className="app">
 
       <Modal
         open={open}
-        onClose={handleClose}
-      >
+        onClose={() => setOpen(false)}
+      > 
         <div style={modalStyle} className={classes.paper}>
         <form className="app__signup">
             <Input
@@ -168,32 +167,36 @@ function App() {
         </form>  
         </div>
       </Modal>
-
+     
       <div className="app__header">
         <img className="app__headerImage"
           src={logo}
           alt=""
         />
-        {user?.displayName ? (
-      <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Login to upload!</h3>
-      )}
-        {user ? (
-          <StyledButton onClick={() => auth.signOut()}>Logout</StyledButton>
-        ): (
+        
+          {user?.displayName ? (
+          <ImageUpload username={user.displayName} />
+          ) : (
+            <h3>Login to upload!</h3>
+          )}
+          {user ? (
           <div className="app__loginContainer">
-          <StyledButton onClick={(signIn) => setOpenSignIn(true)}>Log In</StyledButton>
-          <StyledButton onClick={(signUp) => setOpen(true)}>Sign Up</StyledButton>
-          </div>
-        )}
+          <StyledButton onClick={() => auth.signOut()}>My Profile</StyledButton>
+          <StyledButton onClick={() => auth.signOut()}>Logout</StyledButton>
+          </div> 
+          ): (
+          <div className="app__loginContainer">
+            <StyledButton onClick={(signIn) => setOpenSignIn(true)}>Log In</StyledButton>
+            <StyledButton onClick={(signUp) => setOpen(true)}>Sign Up</StyledButton>
+          </div> 
+          )}  
       </div>
 
       <div className="app__posts">
         <div className="app__postsLeft">
         {
           posts.map(({ id, post }) => (
-            <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+            <Post key={id} postId={id} username={post.username} user={user} caption={post.caption} imageUrl={post.imageUrl} />
           ))
         }
         </div>
@@ -208,4 +211,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

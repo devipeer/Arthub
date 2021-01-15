@@ -19,6 +19,8 @@
 
 .app__headerImage {
   object-fit: contain;
+  display: flex;
+  width: 20%;
 }
 
 .app__signup{
@@ -27,11 +29,18 @@
 }
 
 .app__loginContainer{
-  margin: 5px;
+  float: right;
+  width: 20%;
 }
 
 .app__posts {
   padding: 20px;
   display: flex;
   justify-content: center;
+}
+
+.app__upload{
+  width: 60%;
+  align-items: center;
+  margin-right: 50px;
 }
